@@ -9,7 +9,7 @@ public:
 	~Example();
 
 private:
-
+	int a;
 };
 
 Example::Example()
