@@ -2,23 +2,6 @@
 //
 
 #include "stdafx.h"
-class Example
-{
-public:
-	Example();
-	~Example();
-
-private:
-	int a;
-};
-
-Example::Example()
-{
-}
-
-Example::~Example()
-{
-}
 
 int main()
 {
