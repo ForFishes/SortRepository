@@ -38,6 +38,16 @@ public:
 	}
 	//≤Â»Î≈≈–Ú
 	template<typename Compare>
+	static void Insertsort(vector<Compare>& a)
+	{
+		int N = a.size();
+		for (int i = 1; i != N; ++i)
+		{
+			for (int j = i; j > 0 && less(a[j], a[j - 1]); --j)
+				exch(a, j, j - 1);
+		}
+	}
+	template<typename Compare>
 	static void show(vector<Compare>& a)
 	{
 		for (auto i : a)

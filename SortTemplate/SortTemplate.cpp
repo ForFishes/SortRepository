@@ -7,7 +7,7 @@
 int main()
 {
 	vector<int>vec = { 7,3,2,5,7,8 };
-	CSort::Selectsort(vec);
+	CSort::Insertsort(vec);
 	assert(CSort::isSorted(vec));
 	CSort::show(vec);
     return 0;
