@@ -3,12 +3,13 @@
 #include<iostream>
 #include<functional>
 using namespace std;
+template<typename Compare>
 class CSort
 {
 public:
 	CSort();
 	~CSort();
-	template<typename Compare>
+
 	static bool isSorted(vector<Compare>& a)
 	{
 		for (size_t i = 1; i < a.size(); i++)
@@ -18,7 +19,7 @@ public:
 		return true;
 	}
 	//选择排序的实现，升序排列
-	template<typename Compare>
+
 	static void Selectsort(vector<Compare>& a)
 	{
 		int N = a.size();
@@ -37,7 +38,7 @@ public:
 		}
 	}
 	//插入排序
-	template<typename Compare>
+
 	static void Insertsort(vector<Compare>& a)
 	{
 		int N = a.size();
@@ -48,7 +49,7 @@ public:
 		}
 	}
 	//希尔排序
-	template<typename Compare>
+
 	static void Shellsort(vector<Compare>& a)
 	{
 		int N = a.size();
@@ -69,7 +70,32 @@ public:
 			h = h / 3;
 		}
 	}
-	template<typename Compare>
+	//归并排序
+
+	static void Merge(vector<Compare>& a, int lo, int mid, int hi)
+	{
+		int i = lo, j = mid + 1;
+		for (int k = lo; k <= hi; ++k)
+		{
+			aux[k] = a[k];
+		}
+		for (int k = lo; k <= hi; ++k)
+		{
+			if (i > mid)					a[k] = aux[j++];
+			else if (j > hi)				a[k] = aux[i++];
+			else if (less(aux[j], aux[i]))	a[k] = aux[j++];
+			else							a[k] = aux[i++];
+		}
+	}
+
+	static void MergeSort(vector<Compare>& a)
+	{
+		//vector<Compare> aux;
+		aux.resize(a.size());//一次性分配空间
+		//aux = new vector<Compare>(a.size());
+		MergeSort(a, 0, a.size() - 1);
+	}
+
 	static void show(vector<Compare>& a)
 	{
 		for (auto i : a)
@@ -78,19 +104,28 @@ public:
 		}
 	}
 private:
-	template<typename Compare>
+
 	static bool less(Compare& v, Compare& w)
 	{
 		return v<w;//定义了小于
 				   //return std::less() < v, w > ;
 	}
-	template<typename Compare>
+
 	static void exch(vector<Compare>& a, int i, int j)
 	{
 		Compare t = a[i];
 		a[i] = a[j];
 		a[j] = t;
 	}
-
+	//归并排序给定的数组
+	static vector<Compare> aux;
+	static void MergeSort(vector<Compare>& a, int lo, int hi)
+	{
+		if (hi <= lo)return;//迭代的终止条件
+		int mid = lo + (hi - lo) / 2;
+		MergeSort(a, lo, mid);
+		MergeSort(a, mid + 1, hi);
+		Merge(a, lo, mid, hi);
+	}
 };
 
